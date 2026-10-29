@@ -30,7 +30,7 @@ router.get('/', getCategories);
 // Get Category by ID (public)
 router.get(
   '/:id',
-  [param('id').isMongoId().withMessage('Invalid category ID')],
+  [param('id').trim().notEmpty().withMessage('Invalid category ID')],
   validateRequest,
   getCategoryById
 );
@@ -40,7 +40,7 @@ router.put(
   '/:id',
   protect,
   [
-    param('id').isMongoId().withMessage('Invalid category ID'),
+    param('id').trim().notEmpty().withMessage('Invalid category ID'),
     body('name').optional().trim().notEmpty().withMessage('Name cannot be empty'),
     body('description').optional().isString().withMessage('Description must be a string'),
   ],
@@ -52,7 +52,7 @@ router.put(
 router.delete(
   '/:id',
   protect,
-  [param('id').isMongoId().withMessage('Invalid category ID')],
+  [param('id').trim().notEmpty().withMessage('Invalid category ID')],
   validateRequest,
   deleteCategory
 );

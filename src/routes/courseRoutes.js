@@ -19,7 +19,7 @@ router.post(
   [
     body('title').trim().notEmpty().withMessage('Title is required'),
     body('description').optional().isString().withMessage('Description must be a string'),
-    body('category').trim().isMongoId().withMessage('Valid category ID is required'),
+    body('category').trim().notEmpty().withMessage('Valid category ID is required'),
   ],
   validateRequest,
   createCourse
@@ -31,7 +31,7 @@ router.get('/', getCourses);
 // Get Course by ID (public)
 router.get(
   '/:id',
-  [param('id').isMongoId().withMessage('Invalid course ID')],
+  [param('id').trim().notEmpty().withMessage('Invalid course ID')],
   validateRequest,
   getCourseById
 );
@@ -41,10 +41,10 @@ router.put(
   '/:id',
   protect,
   [
-    param('id').isMongoId().withMessage('Invalid course ID'),
+    param('id').trim().notEmpty().withMessage('Invalid course ID'),
     body('title').optional().trim().notEmpty().withMessage('Title cannot be empty'),
     body('description').optional().isString().withMessage('Description must be a string'),
-    body('category').optional().trim().isMongoId().withMessage('Invalid category ID'),
+    body('category').optional().trim().notEmpty().withMessage('Invalid category ID'),
   ],
   validateRequest,
   updateCourse
