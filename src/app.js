@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import connectDB from './config/db.js';
+// import connectDB from './config/db.js'; // DB not used – static data
 import authRoutes from './routes/authRoutes.js';
 import categoryRoutes from './routes/categoryRoutes.js';
 import courseRoutes from './routes/courseRoutes.js';
